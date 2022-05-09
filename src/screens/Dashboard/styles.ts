@@ -1,8 +1,8 @@
+import styled from 'styled-components/native';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-import styled from 'styled-components/native';
 import {
   getBottomSpace,
   getStatusBarHeight,
