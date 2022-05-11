@@ -7,7 +7,7 @@ interface Props extends TouchableOpacityProps {
   title: string;
 }
 
-export const CategorySelect = ({ title, ...rest }: Props) => {
+export const CategorySelectButton = ({ title, ...rest }: Props) => {
   return (
     <Container {...rest}>
       <Category>{title}</Category>
