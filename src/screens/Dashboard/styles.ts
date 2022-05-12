@@ -2,6 +2,10 @@ import styled from 'styled-components/native';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import {
+  BorderlessButton,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
 import {
   getBottomSpace,
@@ -15,7 +19,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Header = styled.View`
+export const Header = styled(GestureHandlerRootView)`
   width: 100%;
   height: ${RFPercentage(42)}px;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -60,6 +64,8 @@ export const UserName = styled.Text`
   font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
+
+export const LogoutButton = styled(BorderlessButton)``;
 
 export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secondary};
