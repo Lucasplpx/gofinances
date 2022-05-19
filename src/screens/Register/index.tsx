@@ -21,6 +21,7 @@ import {
   Title,
   TransactionTypes,
 } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface FormData {
   name: string;
@@ -38,8 +39,7 @@ const schema = Yup.object().shape({
 export const Register = () => {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
-
-  const dataKey = '@gofinances:transactions';
+  const { user } = useAuth();
 
   const [category, setCategory] = useState({
     key: 'category',
@@ -85,12 +85,14 @@ export const Register = () => {
     };
 
     try {
-      const data = await AsyncStorage.getItem(dataKey);
+      const dataKeyUser = `@gofinances:transactions_user:${user.id}`;
+
+      const data = await AsyncStorage.getItem(dataKeyUser);
       const currentData = data ? JSON.parse(data) : [];
 
       const dataFormatted = [...currentData, newTransaction];
 
-      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+      await AsyncStorage.setItem(dataKeyUser, JSON.stringify(dataFormatted));
       clearForm();
       navigation.navigate('Listagem');
     } catch (error) {

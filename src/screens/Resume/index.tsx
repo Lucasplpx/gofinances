@@ -25,6 +25,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 import { useFocusEffect } from '@react-navigation/native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useAuth } from '../../hooks/auth';
 
 interface TransactionData {
   type: 'positive' | 'negative';
@@ -46,12 +47,11 @@ interface CategoryData {
 export const Resume = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const { user } = useAuth();
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>(
     []
   );
   const theme = useTheme();
-  const dataKey = '@gofinances:transactions';
 
   useFocusEffect(
     useCallback(() => {
@@ -69,7 +69,8 @@ export const Resume = () => {
 
   async function loadData() {
     setIsLoading(true);
-    const response = await AsyncStorage.getItem(dataKey);
+    const dataKeyUser = `@gofinances:transactions_user:${user.id}`;
+    const response = await AsyncStorage.getItem(dataKeyUser);
     const responseFormatted = response ? JSON.parse(response) : [];
 
     const expensives = responseFormatted.filter(
