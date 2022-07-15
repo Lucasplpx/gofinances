@@ -12,9 +12,13 @@ import {
 
 import theme from './src/global/styles/theme';
 import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 
 import { AuthProvider, useAuth } from './src/hooks/auth';
 import { Routes } from './src/routes';
+
+SplashScreen.preventAutoHideAsync();
+setTimeout(SplashScreen.hideAsync, 5000);
 
 export default function App() {
   const [fontsLoaded] = useFonts({
